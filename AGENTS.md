@@ -1,9 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+# Agent Rules
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This project runs Next.js 16 App Router with TypeScript strict mode.
+Read `PROJECT_ARCHITECTURE.md` before writing any code.
+Follow all conventions defined there exactly.
 
 <!-- END:nextjs-agent-rules -->
-
-npm install -D prettier husky lint-staged eslint-plugin-import @typescript-eslint/eslint-plugin @typescript-eslint/parser
