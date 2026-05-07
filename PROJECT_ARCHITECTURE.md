@@ -27,21 +27,21 @@
 
 ## 1. Stack Overview
 
-| Concern | Choice | Reason |
-|---|---|---|
-| Framework | Next.js (latest stable, App Router) | SSR/SSG/ISR, file-based routing, built-in image optimization |
-| Language | TypeScript (strict mode) | Production safety, better DX with NestJS DTO alignment |
-| Styling | Tailwind CSS v4 + shadcn/ui | Utility-first + unstyled headless primitives you own |
-| i18n | next-intl | Best App Router support, URL-based, RTL-aware, full TS |
-| Theme | next-themes | System-preference detection, SSR-safe, zero flash |
-| State | Redux Toolkit (RTK) + RTK Query | Predictable state, RTK Query replaces a standalone HTTP client |
-| Forms | React Hook Form + Zod | Schema-driven, composable, aligns with NestJS DTOs |
-| Auth | JWT via NestJS backend + httpOnly cookies | Backend owns auth; frontend is stateless regarding credentials |
-| Testing | Vitest + React Testing Library + Playwright | Fast unit/integration + reliable e2e |
-| Linting | ESLint (Next.js config) + Prettier | Enforced formatting and code quality |
-| Git hooks | Husky + lint-staged | Pre-commit quality gates |
-| Fonts | Vazirmatn (Persian + Latin) | Open source, well-hinted, covers both scripts |
-| Deployment | Vercel (primary) + Liara (IR region) | Zero-config Vercel + Liara for Persian-region availability |
+| Concern    | Choice                                      | Reason                                                         |
+| ---------- | ------------------------------------------- | -------------------------------------------------------------- |
+| Framework  | Next.js (latest stable, App Router)         | SSR/SSG/ISR, file-based routing, built-in image optimization   |
+| Language   | TypeScript (strict mode)                    | Production safety, better DX with NestJS DTO alignment         |
+| Styling    | Tailwind CSS v4 + shadcn/ui                 | Utility-first + unstyled headless primitives you own           |
+| i18n       | next-intl                                   | Best App Router support, URL-based, RTL-aware, full TS         |
+| Theme      | next-themes                                 | System-preference detection, SSR-safe, zero flash              |
+| State      | Redux Toolkit (RTK) + RTK Query             | Predictable state, RTK Query replaces a standalone HTTP client |
+| Forms      | React Hook Form + Zod                       | Schema-driven, composable, aligns with NestJS DTOs             |
+| Auth       | JWT via NestJS backend + httpOnly cookies   | Backend owns auth; frontend is stateless regarding credentials |
+| Testing    | Vitest + React Testing Library + Playwright | Fast unit/integration + reliable e2e                           |
+| Linting    | ESLint (Next.js config) + Prettier          | Enforced formatting and code quality                           |
+| Git hooks  | Husky + lint-staged                         | Pre-commit quality gates                                       |
+| Fonts      | Vazirmatn (Persian + Latin)                 | Open source, well-hinted, covers both scripts                  |
+| Deployment | Vercel (primary) + Liara (IR region)        | Zero-config Vercel + Liara for Persian-region availability     |
 
 ---
 
@@ -104,7 +104,7 @@ Following the [Next.js recommended project structure](https://nextjs.org/docs/ap
 ├── hooks/                           # Global custom hooks
 ├── types/                           # Global TypeScript types and interfaces
 ├── public/                          # Static assets
-├── middleware.ts                    # next-intl + auth route protection
+├── proxy.ts                    # next-intl + auth route protection
 ├── next.config.ts
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -117,15 +117,15 @@ Following the [Next.js recommended project structure](https://nextjs.org/docs/ap
 
 ### Naming Conventions
 
-| Type | Convention | Example |
-|---|---|---|
-| Components | PascalCase directory + `index.tsx` | `components/shared/Navbar/index.tsx` |
-| Hooks | camelCase prefixed with `use` | `useAuth.ts` |
-| Utilities | camelCase | `formatDate.ts` |
-| Types/Interfaces | PascalCase, `I` prefix for interfaces | `IUser`, `UserRole` |
-| API slices | camelCase + `Api` suffix | `userApi.ts` |
-| Redux slices | camelCase + `Slice` suffix | `authSlice.ts` |
-| Translation keys | nested dot-notation, snake_case | `"common.submit_button"` |
+| Type             | Convention                            | Example                              |
+| ---------------- | ------------------------------------- | ------------------------------------ |
+| Components       | PascalCase directory + `index.tsx`    | `components/shared/Navbar/index.tsx` |
+| Hooks            | camelCase prefixed with `use`         | `useAuth.ts`                         |
+| Utilities        | camelCase                             | `formatDate.ts`                      |
+| Types/Interfaces | PascalCase, `I` prefix for interfaces | `IUser`, `UserRole`                  |
+| API slices       | camelCase + `Api` suffix              | `userApi.ts`                         |
+| Redux slices     | camelCase + `Slice` suffix            | `authSlice.ts`                       |
+| Translation keys | nested dot-notation, snake_case       | `"common.submit_button"`             |
 
 ---
 
@@ -147,12 +147,12 @@ import { defineRouting } from 'next-intl/routing';
 export const routing = defineRouting({
   locales: ['fa', 'en'],
   defaultLocale: 'fa',
-  localePrefix: 'always',   // always show /fa/ or /en/ in URL
+  localePrefix: 'always', // always show /fa/ or /en/ in URL
 });
 ```
 
 ```ts
-// middleware.ts
+// proxy.ts
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './lib/i18n/routing';
 
@@ -192,7 +192,7 @@ export default async function Page() {
 }
 
 // Client Component
-'use client';
+('use client');
 import { useTranslations } from 'next-intl';
 
 export function SubmitButton() {
@@ -267,6 +267,7 @@ const vazirmatn = localFont({
 ```
 
 Set `font-family` in `globals.css`:
+
 ```css
 body {
   font-family: var(--font-vazirmatn), sans-serif;
@@ -358,7 +359,7 @@ const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
-  credentials: 'include',             // send httpOnly cookies
+  credentials: 'include', // send httpOnly cookies
   prepareHeaders: (headers) => {
     // CSRF token or any static header if needed
     return headers;
@@ -398,7 +399,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['User', 'Post'],         // Add resource tags here
+  tagTypes: ['User', 'Post'], // Add resource tags here
   endpoints: () => ({}),
 });
 ```
@@ -477,15 +478,14 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        {/* shadcn/ui FormField components */}
-      </form>
+      <form onSubmit={form.handleSubmit(onSubmit)}>{/* shadcn/ui FormField components */}</form>
     </Form>
   );
 }
 ```
 
 **Rules:**
+
 - Validation errors should use translated messages via `next-intl`'s `t()` inside the schema factory.
 - Never write validation logic inline in components.
 - Server errors from the API should be mapped onto form fields via `form.setError()`.
@@ -541,8 +541,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     alternates: {
       canonical: `/${params.locale}`,
       languages: {
-        'fa': '/fa',
-        'en': '/en',
+        fa: '/fa',
+        en: '/en',
       },
     },
     openGraph: {
@@ -553,6 +553,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 ```
 
 **Checklist:**
+
 - [ ] `robots.txt` — generated via `app/robots.ts`
 - [ ] `sitemap.xml` — generated via `app/sitemap.ts`
 - [ ] `hreflang` alternate links on every page (shown above)
@@ -566,11 +567,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 ### Setup
 
-| Layer | Tool | Scope |
-|---|---|---|
+| Layer              | Tool                           | Scope                            |
+| ------------------ | ------------------------------ | -------------------------------- |
 | Unit / Integration | Vitest + React Testing Library | Components, hooks, utils, slices |
-| E2E | Playwright | Critical user flows |
-| API mocking | MSW (Mock Service Worker) | Mock RTK Query in tests |
+| E2E                | Playwright                     | Critical user flows              |
+| API mocking        | MSW (Mock Service Worker)      | Mock RTK Query in tests          |
 
 ### File Placement
 
@@ -630,12 +631,14 @@ export default defineConfig({
 ### What to Test
 
 **Always test:**
+
 - Auth flow (login, token expiry, redirect)
 - Forms: validation messages, submission, server error mapping
 - RTK Query endpoints: loading, success, error states (via MSW)
 - Redux slices: reducers and selectors
 
 **Do not test:**
+
 - shadcn/ui internal component logic
 - CSS / visual styles
 - Implementation details of third-party libraries
@@ -659,6 +662,7 @@ NEXT_PUBLIC_APP_URL=https://example.com
 ```
 
 **Rules:**
+
 - `NEXT_PUBLIC_` prefix = exposed to the browser bundle. Never put secrets here.
 - Server-only vars (no prefix) are only available in Server Components, API routes, and middleware.
 - Never hardcode URLs or keys in source code.
@@ -671,6 +675,7 @@ NEXT_PUBLIC_APP_URL=https://example.com
 ### ESLint
 
 Using `eslint-config-next` as the base, extended with:
+
 - `@typescript-eslint/recommended`
 - `eslint-plugin-import` (import order enforcement)
 
@@ -723,13 +728,13 @@ Pre-commit hook runs lint-staged. Pre-push hook runs `vitest run`.
 
 - Connect GitHub repo, auto-deploy on push to `main`.
 - Set all production env vars in Vercel dashboard.
-- Enable **Edge Middleware** (middleware.ts runs on the edge by default).
+- Enable **Edge Middleware** (proxy.ts runs on the edge by default).
 - Use Vercel's **Preview Deployments** for every PR.
 
 ```json
 // vercel.json — only if customization is needed
 {
-  "regions": ["fra1"]   // Frankfurt for EU/IR latency
+  "regions": ["fra1"] // Frankfurt for EU/IR latency
 }
 ```
 
@@ -805,18 +810,18 @@ test(login): add e2e test for invalid credentials
 
 These items are **not decided yet** and must be resolved before the relevant feature is built.
 
-| # | Question | Impact | Priority |
-|---|---|---|---|
-| 1 | Will the NestJS backend implement **WebSockets**? If yes, plan for a real-time layer (Socket.io client or native WS). | Real-time features | High |
-| 2 | **File uploads**: handled client-to-backend directly, or through a Next.js API proxy (for virus scanning, size limits)? | File feature scope | High |
-| 3 | **Role-based access control (RBAC)**: How granular? Define roles before building any protected route logic. | Middleware, UI | High |
-| 4 | **Pagination strategy**: cursor-based or offset-based from NestJS? Affects RTK Query cache invalidation design. | All list views | Medium |
-| 5 | **Image CDN**: Will user-uploaded images be served from a CDN (S3 + CloudFront, or Liara Object Storage)? Affects `next/image` `domains` config. | Media features | Medium |
-| 6 | **Error monitoring**: No tool chosen yet. Sentry is the standard choice when ready. Drop-in addition. | Production stability | Medium |
-| 7 | **Analytics**: Persian region may require a self-hosted alternative to Google Analytics (e.g., Umami). | Marketing/growth | Low |
-| 8 | **PWA support**: Would offline capability or "Add to Home Screen" be valuable for mobile users? | Mobile UX | Low |
-| 9 | **Email templates**: If transactional emails are needed, does NestJS handle them fully, or does Next.js need to render templates? | Notifications | Low |
-| 10 | **Storybook**: Worth adding for the component library once the design system stabilizes. | DX, design alignment | Low |
+| #   | Question                                                                                                                                         | Impact               | Priority |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- | -------- |
+| 1   | Will the NestJS backend implement **WebSockets**? If yes, plan for a real-time layer (Socket.io client or native WS).                            | Real-time features   | High     |
+| 2   | **File uploads**: handled client-to-backend directly, or through a Next.js API proxy (for virus scanning, size limits)?                          | File feature scope   | High     |
+| 3   | **Role-based access control (RBAC)**: How granular? Define roles before building any protected route logic.                                      | Middleware, UI       | High     |
+| 4   | **Pagination strategy**: cursor-based or offset-based from NestJS? Affects RTK Query cache invalidation design.                                  | All list views       | Medium   |
+| 5   | **Image CDN**: Will user-uploaded images be served from a CDN (S3 + CloudFront, or Liara Object Storage)? Affects `next/image` `domains` config. | Media features       | Medium   |
+| 6   | **Error monitoring**: No tool chosen yet. Sentry is the standard choice when ready. Drop-in addition.                                            | Production stability | Medium   |
+| 7   | **Analytics**: Persian region may require a self-hosted alternative to Google Analytics (e.g., Umami).                                           | Marketing/growth     | Low      |
+| 8   | **PWA support**: Would offline capability or "Add to Home Screen" be valuable for mobile users?                                                  | Mobile UX            | Low      |
+| 9   | **Email templates**: If transactional emails are needed, does NestJS handle them fully, or does Next.js need to render templates?                | Notifications        | Low      |
+| 10  | **Storybook**: Worth adding for the component library once the design system stabilizes.                                                         | DX, design alignment | Low      |
 
 ---
 
@@ -835,5 +840,5 @@ For every new developer or AI agent starting on this project:
 
 ---
 
-*Last updated: project initialization*
-*Maintained by: [team lead name]*
+_Last updated: project initialization_
+_Maintained by: [team lead name]_
