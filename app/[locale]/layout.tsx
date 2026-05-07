@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes';
 import localFont from 'next/font/local';
 import { routing } from '@/lib/i18n/routing';
 import '../globals.css';
+import { StoreProvider } from '@/components/shared/StoreProvider';
 
 const vazirmatn = localFont({
   src: '../../public/fonts/Vazirmatn[wght].woff2',
@@ -39,9 +40,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={`${vazirmatn.variable} font-sans antialiased`}>
+      <body className={`${vazirmatn.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          <StoreProvider>
+            <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          </StoreProvider>
         </ThemeProvider>
       </body>
     </html>
