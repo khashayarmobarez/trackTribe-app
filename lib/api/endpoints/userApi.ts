@@ -1,5 +1,5 @@
 import { baseApi } from '../baseApi';
-import type { IUser } from '@/lib/store/slices/authSlice';
+import type { IUser } from '@/types/auth';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
