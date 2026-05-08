@@ -34,15 +34,3 @@ export interface AuthState {
   isLoading: boolean;
   error: string | null;
 }
-
-// Session types
-export interface SessionData {
-  user: IUser;
-  expires: string; // ISO date string
-}
-
-// Token types (for reference, tokens are stored as httpOnly cookies)
-export interface TokenPair {
-  accessToken: string;
-  refreshToken: string;
-}
