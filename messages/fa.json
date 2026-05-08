@@ -6,6 +6,14 @@
     "save": "ذخیره",
     "delete": "حذف",
     "edit": "ویرایش",
-    "back": "بازگشت"
+    "back": "بازگشت",
+    "switch_to_dark": "تغییر به حالت تاریک",
+    "switch_to_light": "تغییر به حالت روشن",
+    "switch_language": "تغییر زبان",
+    "dashboard": "داشبورد",
+    "features": "امکانات",
+    "about": "درباره ما",
+    "login": "ورود",
+    "sign_up": "ثبت‌نام"
   }
 }
