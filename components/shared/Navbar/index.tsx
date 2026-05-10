@@ -31,14 +31,13 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <div className="hidden md:flex items-center gap-2">
-            <Link href="/login">
-              <Button variant="ghost" size="sm">
-                {t('login') || 'Login'}
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button size="sm">{t('sign_up') || 'Sign Up'}</Button>
-            </Link>
+            <Button variant="ghost" size="sm" render={<Link href="/login" />}>
+              {t('login')}
+            </Button>
+
+            <Button size="sm" render={<Link href="/register" />}>
+              {t('sign_up')}
+            </Button>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
