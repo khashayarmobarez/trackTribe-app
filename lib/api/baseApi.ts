@@ -6,7 +6,7 @@ import { logout } from '../store/slices/authSlice';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API_URL,
+  baseUrl: '/api',
   credentials: 'include',
   prepareHeaders: (headers) => {
     // Add any custom headers here if needed (e.g., CSRF token)
