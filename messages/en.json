@@ -15,5 +15,22 @@
     "about": "About",
     "login": "Login",
     "sign_up": "Sign Up"
+  },
+  "auth": {
+    "login_title": "Login to your account",
+    "register_title": "Create an account",
+    "email_label": "Email",
+    "password_label": "Password",
+    "name_label": "Full Name",
+    "confirm_password_label": "Confirm Password",
+    "login_button": "Login",
+    "login_link": "Login",
+    "register_button": "Create Account",
+    "register_link": "Register",
+    "logging_in": "Logging in...",
+    "registering": "Creating account...",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "server_error": "An error occurred. Please try again."
   }
 }

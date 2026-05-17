@@ -15,5 +15,22 @@
     "about": "درباره ما",
     "login": "ورود",
     "sign_up": "ثبت‌نام"
+  },
+  "auth": {
+    "login_title": "ورود به حساب کاربری",
+    "register_title": "ایجاد حساب کاربری",
+    "email_label": "ایمیل",
+    "password_label": "رمز عبور",
+    "name_label": "نام و نام خانوادگی",
+    "confirm_password_label": "تکرار رمز عبور",
+    "login_button": "ورود",
+    "login_link": "ورود",
+    "register_button": "ایجاد حساب",
+    "register_link": "ثبت‌نام",
+    "logging_in": "در حال ورود...",
+    "registering": "در حال ایجاد حساب...",
+    "no_account": "حساب کاربری ندارید؟",
+    "has_account": "قبلاً ثبت‌نام کرده‌اید؟",
+    "server_error": "خطایی رخ داد. لطفاً دوباره تلاش کنید."
   }
 }

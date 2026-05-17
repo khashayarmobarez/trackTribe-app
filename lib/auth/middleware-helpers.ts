@@ -7,9 +7,16 @@ export const protectedRoutes = ['/dashboard', '/settings', '/profile'];
 export const authRoutes = ['/login', '/register'];
 
 export function isProtectedRoute(pathname: string): boolean {
-  return protectedRoutes.some((route) => pathname.includes(route));
+  // Remove locale prefix for checking
+  const withoutLocale = pathname.replace(/^\/(fa|en)/, '') || '/';
+  return protectedRoutes.some(
+    (route) => withoutLocale === route || withoutLocale.startsWith(route + '/')
+  );
 }
 
 export function isAuthRoute(pathname: string): boolean {
-  return authRoutes.some((route) => pathname.includes(route));
+  const withoutLocale = pathname.replace(/^\/(fa|en)/, '') || '/';
+  return authRoutes.some(
+    (route) => withoutLocale === route || withoutLocale.startsWith(route + '/')
+  );
 }
