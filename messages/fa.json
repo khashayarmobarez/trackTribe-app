@@ -16,6 +16,12 @@
     "login": "ورود",
     "sign_up": "ثبت‌نام"
   },
+  "seo": {
+    "login_title": "ورود",
+    "login_description": "به حساب TrackTribe خود وارد شوید و موسیقی و جامعه خود را مدیریت کنید.",
+    "register_title": "ثبت‌نام",
+    "register_description": "به TrackTribe بپیوندید و سفر موسیقی خود را با جامعه به اشتراک بگذارید."
+  },
   "auth": {
     "login_title": "ورود به حساب کاربری",
     "register_title": "ایجاد حساب کاربری",

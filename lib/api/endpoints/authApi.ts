@@ -36,17 +36,8 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
       }),
     }),
-    getMe: builder.query<IUser, void>({
-      query: () => '/users/me',
-      providesTags: ['User'],
-    }),
   }),
 });
 
-export const {
-  useLoginMutation,
-  useRegisterMutation,
-  useLogoutMutation,
-  useRefreshMutation,
-  useGetMeQuery,
-} = authApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useRefreshMutation } =
+  authApi;

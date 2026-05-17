@@ -16,6 +16,12 @@
     "login": "Login",
     "sign_up": "Sign Up"
   },
+  "seo": {
+    "login_title": "Login",
+    "login_description": "Sign in to your TrackTribe account to manage your music and connect with your tribe.",
+    "register_title": "Create Account",
+    "register_description": "Join TrackTribe and start sharing your music journey with the community."
+  },
   "auth": {
     "login_title": "Login to your account",
     "register_title": "Create an account",
