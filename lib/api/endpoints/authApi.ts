@@ -9,7 +9,7 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-      invalidatesTags: (_, error) => (error ? ['User'] : []),
+      invalidatesTags: ['User'],
     }),
     register: builder.mutation<AuthResponse, RegisterData>({
       query: (data) => ({
@@ -21,7 +21,7 @@ const authApi = baseApi.injectEndpoints({
           name: data.name,
         },
       }),
-      invalidatesTags: (_, error) => (error ? ['User'] : []),
+      invalidatesTags: ['User'],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({

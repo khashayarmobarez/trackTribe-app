@@ -11,11 +11,9 @@ export default async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const token = req.cookies.get('access_token')?.value;
 
-  // Fast path: skip JWT verification for auth routes themselves
-  const isAuthPage = /\/(fa|en)\/(login|register)/.test(pathname);
-
+  // fix — always verify if token exists
   let isAuthed = false;
-  if (token && !isAuthPage) {
+  if (token) {
     try {
       await verifyAccessToken(token);
       isAuthed = true;
@@ -27,11 +25,6 @@ export default async function middleware(req: NextRequest) {
   if (isProtectedRoute(pathname) && !isAuthed) {
     const locale = pathname.split('/')[1] || 'fa';
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
-  }
-
-  if (isAuthRoute(pathname) && isAuthed) {
-    const locale = pathname.split('/')[1] || 'fa';
-    return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
   }
 
   return intlMiddleware(req);
