@@ -1,4 +1,13 @@
 {
+  "home": {
+    "title": "Welcome to TrackTribe",
+    "subtitle": "Create an account or sign in to get started.",
+    "login": "Log in",
+    "register": "Sign up",
+    "welcome": "Hello, {name}!",
+    "loading": "Loading...",
+    "logout": "Log out"
+  },
   "common": {
     "loading": "Loading...",
     "submit": "Submit",
@@ -37,6 +46,8 @@
     "registering": "Creating account...",
     "no_account": "Don't have an account?",
     "has_account": "Already have an account?",
-    "server_error": "An error occurred. Please try again."
+    "server_error": "An error occurred. Please try again.",
+    "invalid_credentials": "Invalid email or password.",
+    "email_taken": "This email is already registered."
   }
 }
