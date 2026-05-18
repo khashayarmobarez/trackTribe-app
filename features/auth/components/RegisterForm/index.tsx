@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -44,32 +43,29 @@ export function RegisterForm() {
     },
   });
 
-  const onSubmit = useCallback(
-    async (values: RegisterFormValues) => {
-      dispatch(setLoading(true));
-      dispatch(setError(null));
+  async function onSubmit(values: RegisterFormValues) {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
 
-      try {
-        const result = await register({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-        }).unwrap();
-        dispatch(setUser(result.user));
-        router.push('/dashboard');
-      } catch (err: unknown) {
-        if (err instanceof Object && 'error' in err) {
-          const errorData = err as { error?: string };
-          dispatch(setError(errorData.error || 'خطا در ثبت‌نام'));
-        } else {
-          dispatch(setError('خطا در ثبت‌نام'));
-        }
-      } finally {
-        dispatch(setLoading(false));
+    try {
+      const result = await register({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      }).unwrap();
+      dispatch(setUser(result.user));
+      router.push('/dashboard');
+    } catch (err: unknown) {
+      const status = (err as { status?: number })?.status;
+      if (status === 409) {
+        form.setError('email', { message: 'این ایمیل قبلاً استفاده شده است' });
+      } else {
+        form.setError('root', { message: t('server_error') });
       }
-    },
-    [register, dispatch, router]
-  );
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm space-y-6">

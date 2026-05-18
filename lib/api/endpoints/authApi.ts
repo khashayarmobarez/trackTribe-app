@@ -1,5 +1,5 @@
 import { baseApi } from '../baseApi';
-import type { AuthResponse, LoginCredentials, RegisterData, IUser } from '@/types/auth';
+import type { AuthResponse, LoginCredentials, RegisterData } from '@/types/auth';
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

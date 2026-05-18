@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -35,26 +34,23 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = useCallback(
-    async (values: LoginFormValues) => {
-      dispatch(setLoading(true));
-      dispatch(setError(null));
+  async function onSubmit(values: LoginFormValues) {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
 
-      try {
-        const result = await login(values).unwrap();
-        dispatch(setUser(result.user));
-        router.push('/dashboard');
-      } catch (err: unknown) {
-        const status = (err as { status?: number })?.status;
-        form.setError('root', {
-          message: status === 401 ? 'ایمیل یا رمز عبور اشتباه است' : t('server_error'),
-        });
-      } finally {
-        dispatch(setLoading(false));
-      }
-    },
-    [login, dispatch, router]
-  );
+    try {
+      const result = await login(values).unwrap();
+      dispatch(setUser(result.user));
+      router.push('/dashboard');
+    } catch (err: unknown) {
+      const status = (err as { status?: number })?.status;
+      form.setError('root', {
+        message: status === 401 ? 'ایمیل یا رمز عبور اشتباه است' : t('server_error'),
+      });
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm space-y-6">

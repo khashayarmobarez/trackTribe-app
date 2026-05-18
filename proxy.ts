@@ -22,6 +22,11 @@ export default async function middleware(req: NextRequest) {
     }
   }
 
+  if (isAuthRoute(pathname) && isAuthed) {
+    const locale = pathname.split('/')[1] || 'fa';
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
+  }
+
   if (isProtectedRoute(pathname) && !isAuthed) {
     const locale = pathname.split('/')[1] || 'fa';
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
