@@ -17,12 +17,14 @@ export function Navbar() {
         </Link>
 
         <section className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" render={<Link href="/login" />}>
-            {t('login')}
-          </Button>
-          <Button size="sm" render={<Link href="/register" />}>
-            {t('sign_up')}
-          </Button>
+          <Link href="/login">
+            <Button variant="ghost" size="sm">
+              {t('login')}
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button size="sm">{t('sign_up')}</Button>
+          </Link>
           <ThemeToggle />
           <LanguageSwitcher />
         </section>

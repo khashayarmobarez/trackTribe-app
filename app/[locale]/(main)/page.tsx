@@ -13,10 +13,12 @@ export default async function HomePage() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-3">
-        <Button render={<Link href="/login" />}>{t('login')}</Button>
-        <Button variant="outline" render={<Link href="/register" />}>
-          {t('register')}
-        </Button>
+        <Link href="/login">
+          <Button>{t('login')}</Button>
+        </Link>
+        <Link href="/register">
+          <Button variant="outline">{t('register')}</Button>
+        </Link>
       </div>
     </main>
   );
